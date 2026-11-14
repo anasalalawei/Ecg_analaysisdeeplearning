@@ -1,0 +1,35 @@
+{
+  "model": "ECGFounder Net1D fine-tuned checkpoint",
+  "checkpoint": "models/best_ecgfounder_ptbxl.pth",
+  "checkpoint_size_bytes": 123147329,
+  "input_shape": [
+    1,
+    12,
+    5000
+  ],
+  "sampling_rate_hz": 500,
+  "duration_seconds": 10,
+  "classes": [
+    "NORM",
+    "MI",
+    "STTC",
+    "CD",
+    "HYP"
+  ],
+  "thresholds": [
+    0.3048989,
+    0.1730635,
+    0.1963626,
+    0.1812232,
+    0.07899384
+  ],
+  "checkpoint_format": "raw state_dict",
+  "architecture": "Net1D, 7 stages, filters [64,160,160,400,400,1024,1024], blocks [2,2,2,3,3,4,4], kernel 16, stride 2, groups_width 16, use_bn=False, use_do=False",
+  "preprocessing": {
+    "source": "WFDB physical values",
+    "normalization": "per-record global z-score over all 12 leads and 5000 samples",
+    "formula": "(signal - signal.mean()) / (signal.std() + 1e-8)",
+    "filtering": "none in saved fine-tuning pipeline",
+    "resampling": "none; input must already be 500Hz and 5000 samples"
+  }
+}
